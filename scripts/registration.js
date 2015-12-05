@@ -1,10 +1,20 @@
 var userDB = {}
 var imageMap = {};
-var selectedSequence = [];
+var selectedSequence = {};
+
+function reset() {
+
+    for( image in selectedSequence) {
+        $(selectedSequence[image]).attr('style','opacity:1');
+    }
+
+    selectedSequence = {}
+    document.getElementById('userid').value = "";
+}
+
 
 function registerUser() {
     userName = document.getElementById('userid').value;
-    console.log("User Name = ", userName);
 
     if(userName.length == 0) {
         alert("User Name can not be empty!");
@@ -14,7 +24,7 @@ function registerUser() {
     /* Check the length of selected images 
      *  - User should select 3 images at the minimum
      */
-    if(selectedSequence.length < 3) {
+    if(Object.keys(selectedSequence).length < 3) {
         alert("Number of Images can not be less than THREE");
         return;
     }
@@ -29,13 +39,14 @@ function registerUser() {
 function imageSelection() {
     console.log(this);
     console.log(this.id);
+    $(this).attr('style','opacity:0.5');
     
-    if(selectedSequence.length == 3 ) {
+    if(Object.keys(selectedSequence).length == 3 ) {
         alert("Number of images exceeded maximum allowed!\n Maximum number of images allowed are THREE");
         return;
     }
 
-    selectedSequence.push(this.id);
+    selectedSequence[this.id] = this;
     console.log("selectedSequence so far = ", selectedSequence);
 
 }
