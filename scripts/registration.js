@@ -8,7 +8,7 @@ function reset() {
         $(selectedSequence[image]).attr('style','opacity:1');
     }
 
-    selectedSequence = {}
+    selectedSequence = {};
     document.getElementById('userid').value = "";
 }
 
@@ -83,7 +83,11 @@ function generateID(){
     console.log(imageMap);
 }
 
-function main(){
+function register(){
     generateID();
     loadTable();
+}
+
+function redirect(){
+    window.location.replace('index.html');
 }
