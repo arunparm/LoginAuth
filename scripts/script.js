@@ -8,7 +8,7 @@ var imageMap={};
 var imageArray = [];
 var shuffledImageArray =[];
 var enteredPassword = [];
-var password = [8,6,2];
+var password = [];
 var lastClicked;
 var validMoves=[];
 var moves = [];
@@ -17,7 +17,7 @@ var exceededMaximum = false;
 function loadTable(){
     enteredPassword = [];
     var length =0;
-    var table= $('#imageTable');
+    var table= $('#imageTableIndex');
     var currentRow;
     for(var i=0;i<25;i++){
 
@@ -87,6 +87,13 @@ function generateID(){
 }
 
 function submit(){
+    console.log("Localstorage: "+localStorage.getItem('userDatabase'));
+    var arr = sessionStorage.getItem('userDatabase').split(',');
+    for(var i=0;i<arr.length;i++){
+        password.push(parseInt(arr[i]));
+    }
+    console.log("Password : "+password);
+
     var submitButton = $('#submitBtn');
     submitButton
         .click(function(){
@@ -124,7 +131,6 @@ function main(){
     submit();
     $('#alert').hide();
     generateMoves();
-    coonsole.log(userDB);
 }
 
 function generateMoves(){

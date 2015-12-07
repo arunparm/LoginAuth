@@ -1,6 +1,6 @@
 var userDB = {}
 var imageMap = {};
-var selectedSequence = {};
+var selectedSequence = [];
 
 function reset() {
 
@@ -33,6 +33,16 @@ function registerUser() {
     userDB[userName] = selectedSequence;
 
     alert("User registration successfull!");
+    var password='';
+    for(var i=0;i<selectedSequence.length;i++){
+        if(i<selectedSequence.length-1)
+            password += selectedSequence[i]+",";
+        else
+            password += selectedSequence[i];
+    }
+    console.log(password);
+    sessionStorage.setItem('userDatabase',password);
+
     window.location.replace("index.html");
 }
  
@@ -46,12 +56,14 @@ function imageSelection() {
         return;
     }
 
-    selectedSequence[this.id] = this;
+    var name = $(this).attr('src');
+    console.log(name);
+    selectedSequence.push($(this).attr('id'));
     console.log("selectedSequence so far = ", selectedSequence);
 
 }
 
-function loadTable(){
+function loadTableRegistration(){
     var table= $('#imageTable');
     console.log(table.attr("id"));
     var currentRow;
@@ -76,18 +88,13 @@ function loadTable(){
     }
 }
 
-function generateID(){
+function generateIDRegistration(){
     for(var i=0;i<25;i++){
-        imageMap[i+1] = 'Image ('+(i+1)+').jpg'
+        imageMap['Image ('+(i+1)+').jpg'] = i+1;
     }
-    console.log(imageMap);
 }
 
 function register(){
-    generateID();
-    loadTable();
-}
-
-function redirect(){
-    window.location.replace('index.html');
+    generateIDRegistration();
+    loadTableRegistration();
 }
