@@ -2,7 +2,7 @@
  * Created by Harshit on 12/5/2015.
  */
 
-const MAX_PWD_LENGTH= 10;
+const MAX_PWD_LENGTH= 100;
 
 var imageMap={};
 var imageArray = [];
@@ -10,7 +10,7 @@ var shuffledImageArray =[];
 var enteredPassword = [];
 var password = [];
 var lastClicked;
-var validMoves=[];
+var validMoves=[0];
 var moves = [];
 var isFirstMove = true;
 var exceededMaximum = false;
@@ -37,7 +37,7 @@ function loadTable(){
                     .attr('id',shuffledImageArray[i])
                     .click(function(){
                         console.log($(this).parent().attr('id'));
-                        if(validMoves.indexOf(parseInt($(this).parent().attr('id'))) > -1 || isFirstMove){
+                        if(validMoves.indexOf(parseInt($(this).parent().attr('id'))) > -1){
                             if($(this).attr('alt') == 'false'){
                                 $(this).attr('style','opacity:0.5');
                                 $(this).attr('alt','true');
